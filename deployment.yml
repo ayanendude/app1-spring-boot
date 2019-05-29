@@ -16,19 +16,19 @@ spec:
     nodePort: 3085
   type: LoadBalancer
   ---
-  apiVersion: extensions/v1beta1
-  kind: Deployment
-  metadata:
-    name: helloworld-deployment
-  spec:
-    replicas: 5
-    template:
-      metadata:
-        labels:
-          app: helloworld
-      spec:
-        containers:
-        - name: myapp
-          image: ayanendude/app1-spring-boot
-          ports:
-          - containerPort: 8085
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+spec:
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: myapp
+        image: ayanendude/app1-spring-boot
+        ports:
+        - containerPort: 8085
