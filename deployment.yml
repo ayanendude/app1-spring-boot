@@ -13,7 +13,7 @@ spec:
     # Port to forward to inside the pod
     targetPort: 8085
     # Port accessible outside cluster
-    nodePort: 3085
+    nodePort: 30085
   type: LoadBalancer
 ---
 apiVersion: extensions/v1beta1
