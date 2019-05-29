@@ -29,6 +29,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: ayanendude/app1-spring-boot
+        image: ayanendude/app1-spring-boot:latest
         ports:
         - containerPort: 8085
