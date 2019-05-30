@@ -1,21 +1,4 @@
 ---
-kind: Service
-apiVersion: v1
-metadata:
-  name: helloworld-service
-spec:
-  selector:
-    app: helloworld
-  ports:
-  - protocol: "TCP"
-    # Port accessible inside cluster
-    port: 4085
-    # Port to forward to inside the pod
-    targetPort: 8085
-    # Port accessible outside cluster
-    nodePort: 30085
-  type: LoadBalancer
----
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -32,3 +15,4 @@ spec:
         image: ayanendude/app1-spring-boot
         ports:
         - containerPort: 8085
+---
