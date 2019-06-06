@@ -17,7 +17,7 @@ node{
   }
 
 
-  //Stage 1 : Build the docker image.
+  //Stage 1 : Build the docker image..
   stage('Build image') {
       sh("docker build -t ${imageTag} .")
   }
