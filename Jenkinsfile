@@ -8,7 +8,7 @@ node{
   def namespace = 'development'
   def imageTag = "ayanendude/${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 
-  //Checkout Code from Git
+  //Checkout Code from Gitt
   stage('Code checkout') {
     checkout scm
   }
