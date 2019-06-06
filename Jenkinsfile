@@ -9,7 +9,7 @@ node{
   def imageTag = "ayanendude/${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 
   //Checkout Code from Git
-  stage('Build image') {
+  stage('Code checkout') {
     checkout scm
   }
   stage('Build application') {
