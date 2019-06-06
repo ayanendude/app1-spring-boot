@@ -3,16 +3,17 @@ kind: Service
 apiVersion: v1
 metadata:
   name: helloworld-service
+  namespace: test-namespace
 spec:
   selector:
     app: helloworld
   ports:
   - protocol: "TCP"
-    # Port accessible inside cluster
+    # Port accessible inside
     port: 4085
     # Port to forward to inside the pod
     targetPort: 8085
-    # Port accessible outside cluster
+    # Port accessible outside
     nodePort: 30085
   type: LoadBalancer
 ---
@@ -20,6 +21,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: helloworld-deployment
+  namespace: test-namespace
 spec:
   replicas: 5
   template:
