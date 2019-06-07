@@ -37,5 +37,6 @@ spec:
       containers:
       - name: myapp
         image: ayanendude/app1-spring-boot
+        imagePullPolicy: Always
         ports:
         - containerPort: 8085
