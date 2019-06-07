@@ -23,7 +23,7 @@ metadata:
   name: helloworld-deployment
   namespace: prod
 spec:
-  replicas: 1
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
