@@ -13,19 +13,23 @@ node{
     checkout scm
   }
   stage('Build application') {
-    //sh("/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean install")
-    sh("mvn clean install")
+    sh("/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean install")
+    //sh("mvn clean install")
   }
 
-
-  //Stage 1 : Build the docker image...
-  stage('Build image') {
-      sh("docker build -t ${imageTag} .")
+  //Stage  : Docker login...
+  stage('Docker Image build') {
+      //sh("docker build -t ${imageTag} .")
+      sh("docker build -t ayanendude/app1-spring-boot .")
   }
+
 
   //Stage 2 : Push the image to docker registry
   stage('Push image to registry') {
-      sh("docker push ${imageTag}")
+      sh("docker push ayanendude/app1-spring-boot
+      withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+      sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+      sh 'docker push ayanendude/app1-spring-boot'")
   }
 
   //Stage 3 : Deploy Application
