@@ -1,0 +1,41 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: helloworld-service
+  namespace: uat
+spec:
+  selector:
+    app: helloworld
+  ports:
+  - protocol: "TCP"
+    # Port accessible inside
+    port: 4085
+    # Port to forward to inside the pod
+    targetPort: 8085
+    # Port accessible outside
+    nodePort: 30085
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+  namespace: uat
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 33%
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: myapp
+        image: ayanendude/app1-spring-boot
+        ports:
+        - containerPort: 8085
