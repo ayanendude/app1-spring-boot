@@ -26,10 +26,9 @@ node{
 
   //Stage 2 : Push the image to docker registry
   stage('Push image to registry') {
-      sh("docker push ayanendude/app1-spring-boot
       withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-      sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-      sh "docker push ayanendude/app1-spring-boot")}
+      sh ("docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
+      sh ("docker push ayanendude/app1-spring-boot")}
   }
 
   //Stage 3 : Deploy Application
