@@ -23,7 +23,7 @@ metadata:
   name: helloworld-deployment
   namespace: test-namespace
 spec:
-  replicas: 5
+  replicas: 3
   strategy:
     type: RollingUpdate
     rollingUpdate:
