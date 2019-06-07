@@ -15,7 +15,7 @@ spec:
     targetPort: 8085
     # Port accessible outside
     nodePort: 30086
-  type: LoadBalancer
+  type: NodePort
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
