@@ -20,7 +20,7 @@ node{
   //Stage  : Docker login...
   stage('Docker Image build') {
       //sh("docker build -t ${imageTag} .")
-      sh("sudo -n /usr/local/bin/docker build -t ayanendude/app1-spring-boot .")
+      sh("sudo -n docker build -t ayanendude/app1-spring-boot .")
   }
 
 
