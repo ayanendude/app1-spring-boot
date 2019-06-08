@@ -34,7 +34,7 @@ node{
   //Stage 3 : Deploy Application
   stage('Deploy Application') {
        switch (namespace) {
-              //Roll out to Dev Environment
+              //Roll out to Dev Environment.
               case "dev":
                    // Create namespace if it doesn't exist
                    //sh("/usr/local/bin/kubectl get ns ${namespace} || /usr/local/bin/kubectl create ns ${namespace}")
