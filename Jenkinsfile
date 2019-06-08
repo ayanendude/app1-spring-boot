@@ -41,7 +41,7 @@ node{
            //Update the imagetag to the latest version
                    //sh("sed -i.bak 's#gcr.io/${project}/${appName}:${imageVersion}#${imageTag}#' ./k8s/development/*.yaml")
                    //Create or update resources
-                    sh("/usr/local/bin/kubectl --namespace=${namespace} apply -f deployment-dev.yaml")
+                    sh("/usr/local/bin/kubectl --namespace=${namespace} apply -f deployment-dev.yml")
                    //sh("kubectl --namespace=${namespace} apply -f k8s/development/service.yaml")
            //Grab the external Ip address of the service
                    //sh("echo http://`kubectl --namespace=${namespace} get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
