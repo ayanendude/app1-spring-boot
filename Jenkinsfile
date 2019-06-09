@@ -30,7 +30,7 @@ node{
       sh ("sudo -n /usr/local/bin/docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
       sh ("sudo -n /usr/local/bin/docker push ayanendude/app1-spring-boot")}
   }
-
+/*
   //Stage 3 : Deploy Application
   stage('Deploy Application') {
        switch (namespace) {
@@ -71,4 +71,5 @@ node{
   }
 
 }
+*/
 }
