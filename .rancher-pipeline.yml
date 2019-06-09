@@ -3,7 +3,7 @@ stages:
   steps:
   - runScriptConfig:
       image: java:8
-      shellScript: sleep 2
+      shellScript: mvn clean install
 - name: build image
   steps:
   - publishImageConfig:
