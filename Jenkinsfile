@@ -30,14 +30,14 @@ node{
       sh ("sudo -n /usr/local/bin/docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
       sh ("sudo -n /usr/local/bin/docker push ayanendude/app1-spring-boot")}
   }
-/*
+
   //Stage 3 : Deploy Application
   stage('Deploy Application') {
        switch (namespace) {
               //Roll out to Dev Environment
               case "dev":
                    // Create namespace if it doesn't exist
-                   sh("sudo -n /usr/local/bin/kubectl version")
+                   sh("sudo -n /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config version")
                    sh("sudo -n /usr/local/bin/kubectl get nodes")
                    //sh("/usr/local/bin/kubectl get ns ${namespace} || /usr/local/bin/kubectl create ns ${namespace}")
            //Update the imagetag to the latest version
@@ -72,5 +72,5 @@ node{
         }
 
     }
-    */
+
 }
