@@ -37,6 +37,7 @@ node{
               //Roll out to Dev Environment
               case "dev":
                    // Create namespace if it doesn't exist
+                   sh("sudo -n /usr/local/bin/kubectl version")
                    sh("sudo -n /usr/local/bin/kubectl get nodes")
                    //sh("/usr/local/bin/kubectl get ns ${namespace} || /usr/local/bin/kubectl create ns ${namespace}")
            //Update the imagetag to the latest version
