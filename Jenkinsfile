@@ -8,31 +8,32 @@ node{
   def namespace = 'dev'
   def imageTag = "ayanendude/${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 
-  //Checkout Code from Gitt
+  //Stage 1 : Checkout code
   stage('Code checkout') {
     checkout scm
     sh("who am i")
   }
+
+  //Stage 2 : Maven to build application
   stage('Build application') {
     sh("/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean install")
     //sh("mvn clean install")
   }
 
-  //Stage  : Docker login...
+  //Stage 3: Docker image build
   stage('Docker Image build') {
       //sh("docker build -t ${imageTag} .")
       sh("sudo -n /usr/local/bin/docker build -t ayanendude/app1-spring-boot .")
   }
 
-
-  //Stage 2 : Push the image to docker registry
+  //Stage 4: Push the image to docker registry
   stage('Push image to registry') {
       withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
       sh ("sudo -n /usr/local/bin/docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
       sh ("sudo -n /usr/local/bin/docker push ayanendude/app1-spring-boot")}
   }
 
-  //Stage 3 : Deploy Application
+  //Stage 5: Deploy Application
   stage('Deploy Application') {
        switch (namespace) {
               //Roll out to Dev Environment
@@ -40,12 +41,10 @@ node{
                    // Create namespace if it doesn't exist
                    sh("sudo -n /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config version")
                    sh("sudo -n /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config get nodes")
-                   //sh("/usr/local/bin/kubectl get ns ${namespace} || /usr/local/bin/kubectl create ns ${namespace}")
-           //Update the imagetag to the latest version
+                   sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config get ns ${namespace} || /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config create ns ${namespace}")
+                   //Update the imagetag to the latest version
                    //sh("sed -i.bak 's#gcr.io/${project}/${appName}:${imageVersion}#${imageTag}#' ./k8s/development/*.yaml")
                    //Create or update resources
-                   //sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config patch -f deployment-dev.yml")
-
                     sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f deployment-dev.yml")
                     sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f deployment-dev.yml")
                    //sh("kubectl --namespace=${namespace} apply -f k8s/development/service.yaml")
