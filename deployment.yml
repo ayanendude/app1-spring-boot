@@ -11,7 +11,7 @@ spec:
   - protocol: "TCP"
     # Port accessible inside
     port: 4085
-    # Port to forward to inside the pod
+    # Port to forward to inside the pod.
     targetPort: 8085
     # Port accessible outside
     nodePort: 30085
