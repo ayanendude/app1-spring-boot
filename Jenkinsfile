@@ -11,6 +11,7 @@ node{
   //Checkout Code from Gitt
   stage('Code checkout') {
     checkout scm
+    sh("who am i")
   }
   stage('Build application') {
     sh("/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean install")
