@@ -1,15 +1,8 @@
 stages:
-- name: build image
+- name: End
   steps:
-  - publishImageConfig:
-      dockerfilePath: ./Dockerfile
-      buildContext: .
-      tag: ayanendude/app1-spring-boot
-      pushRemote: true
-      registry: index.docker.io
-- name: Deploy
-  steps:
-  - applyYamlConfig:
-      path: ./deployment-dev.yaml
+  - runScriptConfig:
+      image: java:8
+      shellScript: echo End
 timeout: 60
 notification: {}
