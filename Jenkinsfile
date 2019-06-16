@@ -1,12 +1,12 @@
 node{
 
   //Define all variables
-  def project = 'project1'
-  def appName = 'app1-spr-hello'
+  //ef project = 'project1'
+  def appName = 'app1-spring-boot'
   def serviceName = "${appName}-backend"
   def imageVersion = 'development'
   def namespace = 'dev'
-  def imageTag = "ayanendude/${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
+  def imageTag = "ayanendude/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 
   //Stage 1 : Checkout code
   stage('Code checkout') {
