@@ -23,14 +23,16 @@ node{
   //Stage 3: Docker image build
   stage('Docker Image build') {
       //sh("docker build -t ${imageTag} .")
-      sh("sudo -n /usr/local/bin/docker build -t ayanendude/app1-spring-boot .")
+      //sh("sudo -n /usr/local/bin/docker build -t ayanendude/app1-spring-boot .")
+      sh("sudo -n /usr/local/bin/docker build -t ${imageTag} .")
   }
 
   //Stage 4: Push the image to docker registry
   stage('Push image to registry') {
       withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
       sh ("sudo -n /usr/local/bin/docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
-      sh ("sudo -n /usr/local/bin/docker push ayanendude/app1-spring-boot")}
+      //sh ("sudo -n /usr/local/bin/docker push ayanendude/app1-spring-boot")
+      sh ("sudo -n /usr/local/bin/docker push ${imageTag}")}
   }
 
   //Stage 5: Deploy Application
