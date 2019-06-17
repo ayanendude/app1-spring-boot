@@ -7,9 +7,10 @@ metadata:
 spec:
   replicas: 2
   selector:
-    app: helloworld
-    env: dev
-    ver: "VERSION"
+    matchLabels:
+     app: helloworld
+     env: dev
+     ver: "VERSION"
   strategy:
     type: RollingUpdate
     rollingUpdate:
