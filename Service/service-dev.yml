@@ -17,4 +17,4 @@ spec:
     targetPort: 8085
     # Port accessible outside
     nodePort: 30086
-  type: LoadBalancer
+  #type: LoadBalancer
