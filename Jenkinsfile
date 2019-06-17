@@ -6,6 +6,7 @@ node{
   def serviceName = "${appName}-backend"
   def imageVersion = 'development'
   def namespace = 'dev'
+  def buildNum = "${env.BUILD_NUMBER}"
   def imageTag = "ayanendude/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 
   //Stage 1 : Checkout code
@@ -48,9 +49,9 @@ node{
                    //sh("sed -i.bak 's#gcr.io/${project}/${appName}:${imageVersion}#${imageTag}#' ./k8s/development/*.yaml")
                    //Create or update resources
                    //sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f deployment-dev.yml")
-                   sh ("sed s%VERSION%${env.BUILD_NUMBER}% Deployment/deployment-dev.yml")
+                   sh ("sed s%VERSION%${buildNum}% Deployment/deployment-dev.yml")
                    sh ("sed s%IMAGENAME%${imageTag}% Deployment/deployment-dev.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f - --record")
-                   sh ("sed s%VERSION%${env.BUILD_NUMBER}% Service/service-dev.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f -")
+                   sh ("sed s%VERSION%${buildNum}% Service/service-dev.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f -")
                     //sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f deployment-dev.yml")
                    // sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f deployment-dev.yml")
                    //sh("kubectl --namespace=${namespace} apply -f k8s/development/service.yaml")
