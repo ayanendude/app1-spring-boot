@@ -48,9 +48,9 @@ node{
                    //sh("sed -i.bak 's#gcr.io/${project}/${appName}:${imageVersion}#${imageTag}#' ./k8s/development/*.yaml")
                    //Create or update resources
                    //sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f deployment-dev.yml")
-                   sh ("sed s%VERSION%${imageTag}% Deployment/deployment-dev.yml")
+                   sh ("sed s%VERSION%${env.BUILD_NUMBER}% Deployment/deployment-dev.yml")
                    sh ("sed s%IMAGENAME%${imageTag}% Deployment/deployment-dev.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f - --record")
-                   sh ("sed s%VERSION%${imageTag}% Service/service-dev.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f - --record")
+                   sh ("sed s%VERSION%${env.BUILD_NUMBER}% Service/service-dev.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f - --record")
                     //sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f deployment-dev.yml")
                    // sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f deployment-dev.yml")
                    //sh("kubectl --namespace=${namespace} apply -f k8s/development/service.yaml")
