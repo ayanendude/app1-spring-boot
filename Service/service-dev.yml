@@ -1,0 +1,20 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: helloworld-service-dev
+  namespace: dev
+spec:
+  selector:
+    app: helloworld
+    env: dev
+    ver: VERSION
+  ports:
+  - protocol: "TCP"
+    # Port accessible inside
+    port: 4086
+    # Port to forward to inside the pod
+    targetPort: 8085
+    # Port accessible outside
+    nodePort: 30086
+  type: LoadBalancer
