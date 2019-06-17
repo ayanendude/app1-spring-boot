@@ -16,7 +16,7 @@ spec:
       labels:
         app: helloworld
         env: dev
-        ver: VERSION
+        ver: "VERSION"
     spec:
       containers:
       - name: myapp
