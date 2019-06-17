@@ -27,7 +27,7 @@ node{
       sh("sudo -n /usr/local/bin/docker build -t ${imageTag} .")
   }
 
-  //Stage 4: Push the image to docker registry
+  //Stage 4: Push the image to docker registry.
   stage('Push image to registry') {
       withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
       sh ("sudo -n /usr/local/bin/docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
