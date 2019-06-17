@@ -10,7 +10,7 @@ spec:
     matchLabels:
      app: helloworld
      env: dev
-     ver: "VERSION"
+     #ver: "VERSION"
   strategy:
     type: RollingUpdate
     rollingUpdate:
