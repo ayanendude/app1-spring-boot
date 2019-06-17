@@ -8,7 +8,7 @@ spec:
   selector:
     app: helloworld
     env: dev
-    ver: VERSION
+    ver: "VERSION"
   ports:
   - protocol: "TCP"
     # Port accessible inside
