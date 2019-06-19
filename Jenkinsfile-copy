@@ -1,6 +1,7 @@
 node{
 
   //Define all variables
+  //ef project = 'project1'
   def appName = 'app1-spring-boot'
   def serviceName = "${appName}-backend"
   def imageVersion = 'development'
@@ -45,10 +46,16 @@ node{
                    sh("sudo -n /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config get nodes")
                    sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config get ns ${namespace} || /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config create ns ${namespace}")
                    //Update the imagetag to the latest version
+                   //sh("sed -i.bak 's#gcr.io/${project}/${appName}:${imageVersion}#${imageTag}#' ./k8s/development/*.yaml")
+                   //Create or update resources
+                   //sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f deployment-dev.yml")
+                   //sh ("sed s%VERSION%${buildNum}% Deployment/deployment-dev.yml > Deployment/deployment-dev.yml")
                    sh ("sed s%VERSION%${buildNum}% Deployment/deployment-dev.yml | sed s%IMAGENAME%${imageTag}% | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f - --record")
                    sh ("sed s%VERSION%${buildNum}% Service/service-dev.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f -")
+                    //sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f deployment-dev.yml")
+                   // sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f deployment-dev.yml")
                    //sh("kubectl --namespace=${namespace} apply -f k8s/development/service.yaml")
-                   //Grab the external Ip address of the service
+           //Grab the external Ip address of the service
                    //sh("echo http://`kubectl --namespace=${namespace} get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
                    break
 
