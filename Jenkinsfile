@@ -12,6 +12,7 @@ node{
   stage('Code checkout') {
     checkout scm
     sh("who am i")
+      break //to test UCD
   }
 
   //Stage 2 : Maven to build application.
