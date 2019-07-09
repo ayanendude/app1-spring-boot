@@ -21,6 +21,28 @@ node{
     //sh("mvn clean install")
   }
 
+    //Stage : Scan
+    stage ('Test & Scan'){
+        parallel Test:{
+            sh "sleep 2"
+            sh "echo 2"
+            sh "mvn test"
+        }, BlackDuck:{
+            sh "sleep 3"
+            sh "echo 3"
+        }, SonarQube:{
+
+            withSonarQubeEnv('Sonar1') {
+                sh 'mvn clean package sonar:sonar \
+                -Dsonar.projectKey=ayanendude_first_spring \
+                -Dsonar.organization=ayanendude-github \
+                -Dsonar.host.url=https://sonarcloud.io \
+                -Dsonar.login=f538d1cdfae15608808898a0437676e813b9bbee'
+            }
+
+        }
+    }
+
   //Stage 3: Docker image build
   stage('Docker Image build') {
       //sh("docker build -t ${imageTag} .")
