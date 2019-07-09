@@ -30,7 +30,7 @@ node{
         }, BlackDuck:{
             sh "sleep 3"
             sh "echo 3"
-        }, SonarQube:{
+        }, /*SonarQube:{
 
             withSonarQubeEnv('Sonar1') {
                 sh '/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean package sonar:sonar \
@@ -40,7 +40,7 @@ node{
                 -Dsonar.login=f538d1cdfae15608808898a0437676e813b9bbee'
             }
 
-        }
+        }*/
     }
 
   //Stage 3: Docker image build
