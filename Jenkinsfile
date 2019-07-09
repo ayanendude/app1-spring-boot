@@ -30,7 +30,7 @@ node{
         }, BlackDuck:{
             sh "sleep 3"
             sh "echo 3"
-        }, /*SonarQube:{
+        }/*, SonarQube:{
 
             withSonarQubeEnv('Sonar1') {
                 sh '/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean package sonar:sonar \
