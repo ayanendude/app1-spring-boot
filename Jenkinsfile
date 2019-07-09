@@ -26,14 +26,14 @@ node{
         parallel Test:{
             sh "sleep 2"
             sh "echo 2"
-            sh "mvn test"
+            sh "/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn test"
         }, BlackDuck:{
             sh "sleep 3"
             sh "echo 3"
         }, SonarQube:{
 
             withSonarQubeEnv('Sonar1') {
-                sh 'mvn clean package sonar:sonar \
+                sh '/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean package sonar:sonar \
                 -Dsonar.projectKey=ayanendude_first_spring \
                 -Dsonar.organization=ayanendude-github \
                 -Dsonar.host.url=https://sonarcloud.io \
