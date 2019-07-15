@@ -40,9 +40,4 @@ spec:
             - /tmp/healthy
           initialDelaySeconds: 5
           periodSeconds: 5
-        readinessProbe:
-          tcpSocket:
-            port: 8085
-          initialDelaySeconds: 5
-          periodSeconds: 10
 
