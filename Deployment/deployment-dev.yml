@@ -29,16 +29,9 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8085
-        args:
-        - /bin/sh
-        - c
-        - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
-        livenessProbe:
+        readinessProbe:
           httpGet:
             path: /rest/docker/hello
             port: 8085
-            httpHeaders:
-            - name: Custom-Header
-              value: Awesome
-          initialDelaySeconds: 60
-          periodSeconds: 30
+          initialDelaySeconds: 6
+          periodSeconds: 3
