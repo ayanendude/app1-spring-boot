@@ -34,10 +34,11 @@ spec:
         - c
         - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
         livenessProbe:
-          exec:
-            command:
-            - cat
-            - /tmp/healthy
-          initialDelaySeconds: 5
-          periodSeconds: 5
-
+          httpGet:
+            path: /rest/docker/hello
+            port: 8085
+            httpHeaders:
+            - name: Custom-Header
+              value: Awesome
+          initialDelaySeconds: 3
+          periodSeconds: 3
