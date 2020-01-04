@@ -17,8 +17,8 @@ node{
 
   //Stage 2 : Maven to build application.
   stage('Build application') {
-    sh("/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean install")
-    //sh("mvn clean install")
+    //sh("/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean install")
+    sh("mvn clean install")
   }
 
     //Stage : Scan
