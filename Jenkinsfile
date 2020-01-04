@@ -47,7 +47,8 @@ node{
   stage('Docker Image build') {
       //sh("docker build -t ${imageTag} .")
       //sh("sudo -n /usr/local/bin/docker build -t ayanendude/app1-spring-boot .")
-      sh("sudo -n /usr/local/bin/docker build -t ${imageTag} .")
+      //sh("sudo -n /usr/local/bin/docker build -t ${imageTag} .")
+      sh("docker build -t ${imageTag} .")
   }
 
   //Stage 4: Push the image to docker registry..
