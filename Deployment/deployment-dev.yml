@@ -29,6 +29,10 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8085
+        livenessProbe:
+          exec:
+            command:
+              - ls
         readinessProbe:
           httpGet:
             path: /rest/docker/hello
