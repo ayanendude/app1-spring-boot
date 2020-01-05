@@ -2,7 +2,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: helloworld-service-dev-VERSION
+  name: helloworld-service-dev
   namespace: dev
 spec:
   selector:
