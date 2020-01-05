@@ -68,8 +68,9 @@ node{
               //Roll out to Dev Environment
               case "dev":
                    // Create namespace if it doesn't exist
-                   sh("sudo -n /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config version")
-                   sh("sudo -n /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config get nodes")
+                   //sh("sudo -n /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config version")
+                   sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config version")
+                   sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config get nodes")
                    sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config get ns ${namespace} || /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config create ns ${namespace}")
                    //Update the imagetag to the latest version
                    sh ("sed s%VERSION%${buildNum}% Deployment/deployment-dev.yml | sed s%IMAGENAME%${imageTag}% | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f - --record")
