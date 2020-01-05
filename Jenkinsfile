@@ -56,10 +56,10 @@ node{
   stage('Push image to registry') {
       withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
       //sh ("sudo -n /usr/local/bin/docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
-      sh ("docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
+      sh ("/usr/local/bin/docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
       //sh ("sudo -n /usr/local/bin/docker push ayanendude/app1-spring-boot")
       //sh ("sudo -n /usr/local/bin/docker push ${imageTag}")}
-      sh ("docker push ${imageTag}")}
+      sh ("/usr/local/bin/docker push ${imageTag}")}
   }
 
   //Stage 5: Deploy Application
