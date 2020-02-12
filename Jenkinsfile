@@ -17,8 +17,8 @@ node{
 
   //Stage 2 : Maven to build application.
   stage('Build application') {
-    sh("/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean install")
-    //sh("mvn clean install")
+    //sh("/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean install")
+    sh "/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn clean install"
   }
 
     //Stage : Scan
@@ -47,15 +47,19 @@ node{
   stage('Docker Image build') {
       //sh("docker build -t ${imageTag} .")
       //sh("sudo -n /usr/local/bin/docker build -t ayanendude/app1-spring-boot .")
-      sh("sudo -n /usr/local/bin/docker build -t ${imageTag} .")
+      //sh("sudo -n /usr/local/bin/docker build -t ${imageTag} .")
+      sh("/usr/local/bin/docker build -t ${imageTag} .")
+      //sh("docker build -t ${imageTag} .")
   }
 
   //Stage 4: Push the image to docker registry..
   stage('Push image to registry') {
       withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-      sh ("sudo -n /usr/local/bin/docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
+      //sh ("sudo -n /usr/local/bin/docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
+      sh ("/usr/local/bin/docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}")
       //sh ("sudo -n /usr/local/bin/docker push ayanendude/app1-spring-boot")
-      sh ("sudo -n /usr/local/bin/docker push ${imageTag}")}
+      //sh ("sudo -n /usr/local/bin/docker push ${imageTag}")}
+      sh ("/usr/local/bin/docker push ${imageTag}")}
   }
 
   //Stage 5: Deploy Application
@@ -64,8 +68,9 @@ node{
               //Roll out to Dev Environment
               case "dev":
                    // Create namespace if it doesn't exist
-                   sh("sudo -n /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config version")
-                   sh("sudo -n /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config get nodes")
+                   //sh("sudo -n /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config version")
+                   sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config version")
+                   sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config get nodes")
                    sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config get ns ${namespace} || /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config create ns ${namespace}")
                    //Update the imagetag to the latest version
                    sh ("sed s%VERSION%${buildNum}% Deployment/deployment-dev.yml | sed s%IMAGENAME%${imageTag}% | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f - --record")

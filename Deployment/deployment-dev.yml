@@ -1,5 +1,5 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: helloworld-deployment-dev
@@ -10,7 +10,7 @@ spec:
     matchLabels:
      app: helloworld
      env: dev
-     ver: "VERSION"
+     #ver: "VERSION"
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -29,6 +29,10 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8085
+        livenessProbe:
+          exec:
+            command:
+              - ls
         readinessProbe:
           httpGet:
             path: /rest/docker/hello

@@ -2,7 +2,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: helloworld-service-dev-VERSION
+  name: helloworld-service-dev
   namespace: dev
 spec:
   selector:
@@ -17,4 +17,4 @@ spec:
     targetPort: 8085
     # Port accessible outside
     nodePort: 30086
-  type: LoadBalancer
+  type: NodePort
