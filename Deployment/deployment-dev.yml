@@ -4,8 +4,6 @@ kind: Deployment
 metadata:
   name: helloworld-deployment-dev
   namespace: dev
-  annotations:
-    flux.weave.works/automated: 'true'
 spec:
   replicas: 2
   selector:
