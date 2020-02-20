@@ -1,0 +1,1 @@
+{"jobID":"8376a9ad-7dc1-8475-0b30-c6ac24ac6740","spec":{"type":"policy","cause":{"Message":"","User":"Ayanendu De \u003cayanendu_de@yahoo.co.uk\u003e"},"spec":{"dev:deployment/helloworld-deployment-dev":{"add":{"automated":"true"},"remove":null}}},"result":null}
