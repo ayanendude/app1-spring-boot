@@ -8,8 +8,8 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-     app: helloworld
-     env: dev
+      app: helloworld
+      env: dev
      #ver: "VERSION"
   strategy:
     type: RollingUpdate
@@ -32,7 +32,7 @@ spec:
         livenessProbe:
           exec:
             command:
-              - ls
+            - ls
         readinessProbe:
           httpGet:
             path: /rest/docker/hello
