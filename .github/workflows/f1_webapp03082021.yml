@@ -1,0 +1,35 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - webapp03082021
+
+on:
+  push:
+    branches:
+      - f1
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: azure/docker-login@v1
+      with:
+        login-server: https://index.docker.io/v1/
+        username: ${{ secrets.AzureAppService_ContainerUsername_2d9e6e34b10c4210b11827fae23c01e4 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_a50b141e5dee40ada932edb370951ee7 }}
+
+    - run: |
+        docker build . -t index.docker.io/${{ secrets.AzureAppService_ContainerUsername_2d9e6e34b10c4210b11827fae23c01e4 }}/ayanendude/app1-spring-boot:${{ github.sha }}
+        docker push index.docker.io/${{ secrets.AzureAppService_ContainerUsername_2d9e6e34b10c4210b11827fae23c01e4 }}/ayanendude/app1-spring-boot:${{ github.sha }}
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'webapp03082021'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_cae0180a482f4a8491f3f8ce06527404 }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_2d9e6e34b10c4210b11827fae23c01e4 }}/ayanendude/app1-spring-boot:${{ github.sha }}'
