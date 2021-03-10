@@ -37,5 +37,6 @@ spec:
           httpGet:
             path: /rest/docker/hello
             port: 8085
-          initialDelaySeconds: 600
+          initialDelaySeconds: 30
           periodSeconds: 15
+          timeoutSeconds: 30
