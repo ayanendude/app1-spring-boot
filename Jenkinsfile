@@ -74,7 +74,47 @@ node{
                    sh("/usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config get ns ${namespace} || /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config create ns ${namespace}")
                    //Update the imagetag to the latest version
                    sh ("sed s%VERSION%${buildNum}% Deployment/deployment-dev.yml | sed s%IMAGENAME%${imageTag}% | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f - --record")
+                   sh ("sed s%VERSION%${buildNum}% Service/service-temp.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f -")
+                   //sh("kubectl --namespace=${namespace} apply -f k8s/development/service.yaml")
+                   //Grab the external Ip address of the service
+                   //sh("echo http://`kubectl --namespace=${namespace} get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
+                   break
+
+        //Roll out to Prd Environment
+              case "production":
+                   // Create namespace if it doesn't exist
+                   sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")
+           //Update the imagetag to the latest version
+                   sh("sed -i.bak 's#gcr.io/${project}/${appName}:${imageVersion}#${imageTag}#' ./k8s/production/*.yaml")
+           //Create or update resources
+                   sh("kubectl --namespace=${namespace} apply -f k8s/production/deployment.yaml")
+                   sh("kubectl --namespace=${namespace} apply -f k8s/production/service.yaml")
+           //Grab the external Ip address of the service
+                   sh("echo http://`kubectl --namespace=${namespace} get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
+                   break
+
+              default:
+                   sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")
+                   //sh("sed -i.bak 's#gcr.io/${project}/${appName}:${imageVersion}#${imageTag}#' ./k8s/development/*.yaml")
+                   sh("kubectl --namespace=${namespace} apply -f deployment.yaml")
+                   //sh("kubectl --namespace=${namespace} apply -f k8s/development/service.yaml")
+                   //sh("echo http://`kubectl --namespace=${namespace} get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
+                   break
+        }
+
+    }
+stage ('Approval Process') {
+    timeout(time: 30, unit: "MINUTES") {
+        input message: 'Do you want to switch Public service', ok: 'Yes'
+    }
+}
+
+stage('Update Service') {
+       switch (namespace) {
+              //Roll out to Dev Environment
+              case "dev":
                    sh ("sed s%VERSION%${buildNum}% Service/service-dev.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f -")
+                   sh ("sed s%VERSION%${buildNum}% Service/service-temp.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f -")
                    //sh("kubectl --namespace=${namespace} apply -f k8s/development/service.yaml")
                    //Grab the external Ip address of the service
                    //sh("echo http://`kubectl --namespace=${namespace} get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
