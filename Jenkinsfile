@@ -123,7 +123,7 @@ stage('Update Service') {
                    //sh ("sed s%VERSION%${buildNumInt}% Service/service-temp.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f -")
                    sh ("sed s%VERSION%${buildNum}% Service/service-dev.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f -")
                    //sh ("sed s%VERSION%${buildNum}% Service/service-temp.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f -")
-                   sh ("sed s%VERSION%${buildNumInt_1}% Deployment/deployment-dev.yml | sed s%IMAGENAME%${imageTag_1}% | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f - --record")
+                   sh ("sed s%VERSION%${buildNumInt_1}% Deployment/deployment-dev.yml | sed s%IMAGENAME%${imageTag_1}% | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f -")
                    
                    //sh("kubectl --namespace=${namespace} apply -f k8s/development/service.yaml")
                    //Grab the external Ip address of the service
