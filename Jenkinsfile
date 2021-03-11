@@ -6,6 +6,8 @@ node{
   def imageVersion = 'development'
   def namespace = 'dev'
   def buildNum = "${env.BUILD_NUMBER}"
+  int buildNumInt = "${env.BUILD_NUMBER}" as Integer
+  int buildNumInt_1 = ${buildNumInt} - 1
   def imageTag = "ayanendude/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 
   //Stage 1 : Checkout code
