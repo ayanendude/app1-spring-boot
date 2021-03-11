@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloworld-deployment-dev
+  name: helloworld-deployment-dev-VERSION
   namespace: dev
 spec:
   replicas: 2
@@ -10,7 +10,7 @@ spec:
     matchLabels:
       app: helloworld
       env: dev
-     #ver: "VERSION"
+      ver: "VERSION"
   strategy:
     type: RollingUpdate
     rollingUpdate:
