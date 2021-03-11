@@ -26,7 +26,7 @@ node{
         parallel Test:{
             sh "sleep 2"
             sh "echo 2"
-            sh "/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn test"
+            //sh "/usr/local/Cellar/maven/3.6.1/libexec/bin/mvn test"
         }, BlackDuck:{
             sh "sleep 3"
             sh "echo 3"
@@ -113,6 +113,7 @@ stage('Update Service') {
        switch (namespace) {
               //Roll out to Dev Environment
               case "dev":
+                   sh ("sed s%VERSION%${buildNum}% Service/service-temp.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f -")
                    sh ("sed s%VERSION%${buildNum}% Service/service-dev.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config apply -f -")
                    sh ("sed s%VERSION%${buildNum}% Service/service-temp.yml | /usr/local/bin/kubectl --kubeconfig /Users/ayanendude/.kube/config delete -f -")
                    //sh("kubectl --namespace=${namespace} apply -f k8s/development/service.yaml")
