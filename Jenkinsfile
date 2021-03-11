@@ -8,7 +8,7 @@ node{
   def buildNum = "${env.BUILD_NUMBER}"
   def buildNumInt = "${env.BUILD_NUMBER}" as Integer
   def buildNumInt_1 = "${buildNumInt}" - 1
-  //def imageTag = "ayanendude/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
+  def imageTag = "ayanendude/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
   def imageTag_1 = "ayanendude/${appName}:${imageVersion}.${env.buildNumInt_1}"
 
   //Stage 1 : Checkout code
