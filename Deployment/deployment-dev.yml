@@ -27,20 +27,20 @@ spec:
       - name: myapp
         image: IMAGENAME
         imagePullPolicy: Always
-        # args:
-        # - /bin/sh
-        # - -c
-        # - touch /tmp/healthy; sleep 10; rm -rf /tmp/healthy; sleep 60
+        args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; sleep 10; rm -rf /tmp/healthy; sleep 60
         ports:
         - containerPort: 8085
-        livenessProbe:
-          exec:
-            command:
-            - ls
-            # - cat
-            # - /tmp/healthy 
-          initialDelaySeconds: 2
-          periodSeconds: 5
+        # livenessProbe:
+        #   exec:
+        #     command:
+        #     - ls
+        #     # - cat
+        #     # - /tmp/healthy 
+        #   initialDelaySeconds: 2
+        #   periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /rest/docker/hello
