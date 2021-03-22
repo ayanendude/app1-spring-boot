@@ -27,17 +27,18 @@ spec:
       - name: myapp
         image: IMAGENAME
         imagePullPolicy: Always
-        args:
-        - /bin/sh
-        - -c
-        - touch /tmp/healthy; sleep 10; rm -rf /tmp/healthy; sleep 60
+        # args:
+        # - /bin/sh
+        # - -c
+        # - touch /tmp/healthy; sleep 10; rm -rf /tmp/healthy; sleep 60
         ports:
         - containerPort: 8085
         livenessProbe:
           exec:
             command:
-            - cat
-            - /tmp/healthy 
+            - ls
+            # - cat
+            # - /tmp/healthy 
           initialDelaySeconds: 2
           periodSeconds: 5
         readinessProbe:
