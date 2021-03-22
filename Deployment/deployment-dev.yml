@@ -36,9 +36,9 @@ spec:
         livenessProbe:
           exec:
             command:
-            - ls
-        #     # - cat
-        #     # - /tmp/healthy 
+            # - ls
+            - cat
+            - /tmp/test.txt 
           initialDelaySeconds: 2
           periodSeconds: 5
         readinessProbe:
