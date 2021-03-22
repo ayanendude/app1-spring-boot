@@ -38,16 +38,19 @@ spec:
           initialDelaySeconds: 2
           periodSeconds: 5
         readinessProbe:
-          httpGet:
-            path: /rest/docker/hello
-            port: 8085
-          initialDelaySeconds: 5
-          periodSeconds: 15
-          timeoutSeconds: 30
+          # httpGet:
+          #   path: /rest/docker/hello
+          #   port: 8085
+          # initialDelaySeconds: 5
+          # periodSeconds: 15
+          # timeoutSeconds: 30
           exec:
             command:
             - cat
-            - /tmp/test2.txt 
+            - /tmp/test2.txt
+          initialDelaySeconds: 5
+          periodSeconds: 15
+          timeoutSeconds: 30 
         startupProbe:
           httpGet:
             path: /rest/docker/hello
