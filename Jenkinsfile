@@ -1,6 +1,6 @@
 node{
 
-  //Define all variables
+  //Define all variables 
   def appName = 'app1-spring-boot'
   def serviceName = "${appName}-backend"
   def imageVersion = 'development'
